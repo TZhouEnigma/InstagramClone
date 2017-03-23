@@ -1,0 +1,35 @@
+
+<head>
+    <title>Upload a photo!</title>
+</head>
+    <body>
+       
+{% if systemprompt %}
+<a href="/upload">goback</a>
+<h2>{{systemprompt}}</h2>
+{% endif %}
+        <div class="title">
+            <h1>Upload a photo to Photoshare</h1>
+        </div>
+        <h2>if the user uploads a photo to an album that have not yet been created, <br>the system will automatically create one for him/her!</h2>
+            <form method="post" enctype="multipart/form-data" action="/upload">
+                <label for="photo">Select photo:</label>
+                <input type="file" name="photo" required='true' /><br />
+                <label for="caption">Please caption:</label>
+                <input type="text" name="caption" required='true' /><br />
+                <label for="album">Please type the album name which you wish to upload:</label>
+                <input type="text" name="album" required='true' /><br />
+                <label for="tags">Please enter tags if you wish</label>
+                <input type="text" name="tag" required='true' /><br />
+                <input type="submit" value="Upload"/>
+            </form>
+            
+            <div class="title">
+            <h1>Create an album here</h1>
+        </div>
+            <form method="post" enctype="multipart/form-data" action="/upload" name="createalbum">
+            <label for="createalbum">Please create an album here if you haven't:</label>
+                <input type="text" name="albumname" /><br />
+                <input type="submit" name="sendname" value="create album" />
+            </form>
+    </body>

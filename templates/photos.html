@@ -1,0 +1,27 @@
+
+
+<a href="/viewphoto">goback</a>
+{% if pics %}
+<h2>Here's your photos</h2>
+    <ul>
+    {% for photo in pics %}
+       {% if name %}
+        <li>
+        <form method="post" action="/viewphoto/{{name}}/{{photo[1]}}">
+        <a href="/goback.html/{{name}}/{{photo[1]}}">delete this photo</a>
+        <img src='data:image/png;base64, {{photo[0]}}'/>
+        <label for="tag">Add tags:</label>
+        <input type="text" name="tag" required='true'/>
+        <input type="submit" name="addtag"/>
+        </form>
+        </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% endif %}
+
+
+{% if not pics %}
+
+<h2>empty album! please add some photos!</h2>
+{% endif %}

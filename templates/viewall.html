@@ -1,0 +1,144 @@
+<a href='/'>Go Back to Home Page</a>
+<form method="post" action="/viewall">
+	 view all photos by tag
+<input type="text" name="searchbytag"/>
+<input type="submit" value="seach tag"/><br>
+</form>
+
+
+
+{% if prompt %}
+{{prompt}}
+{% endif %}
+<br><h1>
+{% if warn %}
+{{warn}}
+{% endif %}
+</h1>
+{% if pdata %}
+    <ul>
+    {% for photo in pdata %}
+        <li>
+        <img src='data:image/png;base64, {{photo[0]}}'/>
+      <form method="post" action="/viewall/{{tnname}}/{{photo[1]}}">
+	       add a commentt
+    <input type="text" name="comment"/>
+  <input type="submit" value="seach tag"/><br>
+            {% if like%}
+           <button name="like">like</button>
+           {% endif %}
+            </form>
+              <h1>Comments:</h1>
+           <ul>
+             {% if com %}
+            {% for var in com %}
+           
+            {% if var[2]==photo[1]%}
+         
+             {% if var[3]==1000000 %}
+              <li>visitor says: {{var[0]}}</li>
+               {% endif %}
+                {% for name in username %}
+          {#{username}}{{name[2]}#}
+          {% if name[2]==var[3] %}
+           <li> {{name[0]}} {{name[1]}}commented:{{var[0]}} </li> 
+         {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            </ul>
+        
+        </li>
+   
+    {% endfor %}
+    </ul>
+{% endif %}
+
+{% if pdatb %}
+    <ul>
+    {% for photo in pdatb %}
+        <li>
+  
+        <img src='data:image/png;base64, {{photo[0]}}'/>
+      <form method="post" action="/viewall/{{tnname}}/{{photo[1]}}">
+	      
+	       <br>
+         
+	       {% if lid %}
+	       {% for ite in lid %}
+	       {% if userlike %}
+	       {% if ite[1]==photo[1] %}
+	       {% for name in userlike%}
+	       {% if name[2]==ite[0]%}
+          <h1>{{name[0]}} {{name[1]}},</h1><br>
+	        {% endif %}
+	        {% endfor %}
+	        {% endif %}
+	        {% endif %}
+	       {% endfor %}
+	        <h1> liked this photo</h1>
+	       {% endif %}
+	        add a comment for this photo
+    <input type="text" name="comment"/>
+
+  <input type="submit" value="comment"/><br>
+           {% if like%}
+           <form method="post" action="/viewall/{{tnname}}/{{photo[1]}}">
+            <input type="submit" name="likes" value="likes"/><br>
+          </form>
+           {% endif %}
+            </form>
+            <h1>Comments:</h1>
+           <ul>
+             {% if com %}
+            {% for var in com %}
+           
+            {% if var[2]==photo[1]%}
+         
+             {% if var[3]==1000000 %}
+              <li>visitor says: {{var[0]}}</li>
+               {% endif %}
+                {% for name in username %}
+          {#{username}}{{name[2]}#}
+          {% if name[2]==var[3] %}
+           <li> {{name[0]}} {{name[1]}}commented:{{var[0]}} </li> 
+         {% endif %}
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            </ul>
+        </li>
+    {% endfor %}
+    </ul>
+ 
+{% endif %}
+
+
+
+
+
+
+<h1>trending tags</h1>
+<ul>
+{% if topfive %}
+
+ {% for tags in topfive %}
+<li><a href="/viewall/{{tags[0]}}/0">
+    {{tags[0]}}</a>
+</li>
+{% endfor %}
+  {% endif %}
+</ul>
+<h1>recommandation</h1>
+<ul>{% if maylike %}
+    {% for tags in maylike %}
+       {% if tags[0]=="can't make suggesion o visistors" %}
+        <h1>can't make recommondation for unregistered user</h1>
+        {% else %}
+        <li><a href="/viewall/{{tags[0]}}/0">{{tags[0]}}</a></li>
+        {% endif %}
+    {% endfor %}
+  {% endif %}
+</ul>

@@ -1,0 +1,47 @@
+
+
+<a href="/">Go Back to Home Page</a>
+  <form method="post" action="/viewphoto">
+	 view my photos by tag
+    <input type="text" name="tagsearch"/>
+  <input type="submit" value="seach tag"/><br>
+	 {% if tagphotos and tagname%}
+<a href="/viewphoto">Go Back to Previous Page</a>
+<h2>Here's your photos with '{{tagname}}' tag</h2>
+    <ul>
+    {% for photo in tagphotos %}
+        <li>
+        <form method="post" action="/viewphoto/{{name}}/{{photo[1]}}">
+        
+        <img src='data:image/png;base64, {{photo[0]}}'/>
+        </form>
+        </li>
+
+    {% endfor %}
+    </ul>
+      {% endif %}
+
+  {% if albums %}
+  <p1>Here are your albums. Click to view photos inside.</p1><br>
+	<h4>Your Albums</h4>
+	<ul>
+		{% for row in albums %}
+			<li>			
+			{% for item in row %} 
+                <a href="/viewphoto/{{item}}">{{item}}</a>
+                <a href="/viewphoto/delete/{{item}}">delete this album</a>
+                 {% endfor %}
+            </li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	{% if not albums and not tagphotos %}
+	<h4>You have no album! Add on ein the upload page!</h4>
+	
+	{% endif%}
+	
+	<!--form method="post" action="/viewphoto">
+	   please enter the tag name which you wish to searh<input type="text" name="tagname"/>
+	   <input type="submit" value="seach tag"/>
+	    
+	</form-->

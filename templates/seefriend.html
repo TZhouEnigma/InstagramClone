@@ -1,0 +1,60 @@
+<head>
+    <title>see all your friends here</title>
+</head>
+    <body>
+        <div class="title">
+            <h1>see all your friends here</h1>
+        </div>
+            <form method="POST" enctype="multipart/form-data" action="/seefriend">
+                <input type="submit"  value="List my friends" name="seefriend" />
+                <input type="submit"  value="Hide my friends" name="hidefriend" />
+            </form>
+            
+             <form method="POST" enctype="multipart/form-data" action="/seefriend">
+                <label for="friendfirstname">Enter your friend's name here:</label>
+                <input type="text" value="firstname" name="friendfirstname"/>
+                <input type="text" value="lastname" name="friendlastname">         
+                <input type="submit"  value="searchfriend" name="searchfriend" />            
+            </form>
+            {% if data %}
+	<h4>Your friends</h4>
+	<ul>
+		{% for row in data %}
+			<li>
+			{% for item in row %} 
+			{{item}}
+			{% endfor %}
+			</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+   
+    {% if dataa %}
+	<h4>email(s) associated with your friend's name</h4>
+	<ul>
+		{% for row in dataa %}
+			<li>
+			{% for item in row %} 
+			{{item}}
+			{% endfor %}
+			</li>
+		{% endfor %}
+	</ul>
+	<form method="POST" enctype="multipart/form-data" action="/seefriend">
+                <label for="friendemail">Confirm your friend's email here:</label>
+                <input type="text"  value="emailbelow" name="friendemail" />
+                <input type="submit"  value="addfriend" name="addfriend" />
+    </form>
+	
+	{% endif %}
+   {% if name %}
+   
+        <p1>congratulationS! YOU HAVE ADDED {{name}} AS YOUR FRIEND!</p1>
+
+   {% endif%}
+   
+   {% if errormessage %}
+        <p1>{{errormessage}}</p1>
+   {% endif%}
+   
+    </body>
